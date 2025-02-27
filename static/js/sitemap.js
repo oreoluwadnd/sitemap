@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     resetFilterUI();
                     urlCheckMessage.classList.remove('show'); // Hide success message
                     urlErrorMessage.classList.add('show');   // Show error message
-                    urlErrorMessageText.textContent = 'Invalid Sitemap URL.'; // Set error text
+                    urlErrorMessageText.textContent = 'Error loading sitemap. Please check the URL and try again!'; // Set error text
                     // showErrorModal('Invalid Sitemap', 'Invalid Sitemap URL.'); // No need for modal alert anymore
                 }
             })
