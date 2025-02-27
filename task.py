@@ -188,7 +188,7 @@ def _pass_changefreq_filter(entry, filters):
 
 @shared_task(bind=True , max_retries=3)
 def sitemap_scrape(self, url: str, filters: dict):
-    sleep(10)  
+    sleep(5)  
     try:
         # Fetch and parse sitemap
         print(filters)

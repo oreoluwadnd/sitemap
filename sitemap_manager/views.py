@@ -22,7 +22,7 @@ def is_valid_url(url):
 def validate_sitemap(url):
     if not is_valid_url(url):
         return False
-    print('Starting check ')
+    print("url")
     try:
         response = requests.get(url, timeout=1)
         print("done check")
@@ -71,6 +71,7 @@ def process_sitemap(request):
     try:
         # Parse the incoming JSON data
         data = json.loads(request.body)
+        print(data)
         
         # Validate the input structure
         if not isinstance(data, dict) or 'data' not in data:
@@ -116,7 +117,7 @@ def process_sitemap(request):
 def scrape_sitemaps(request):
     try:
         data = json.loads(request.body)
-        
+        print(data)
         if not isinstance(data, dict):
             return JsonResponse({'error': 'Invalid input format'}, status=400)
         
@@ -164,10 +165,3 @@ def scrape_sitemaps(request):
 
 def home(request):
     return render(request, 'sitemap.html')
-
-    # 'scrape_options': {
-    #     'title': True,
-    #     'meta_description': True,
-    #     'h1_h5': True,
-    #     'body_text': True
-    # }
