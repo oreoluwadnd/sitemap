@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- WebSocket Connection ---
     function connectWebSocket(taskId) {
-        const websocketUrl = `ws://127.0.0.1:8000/ws/task-progress/${taskId}`; // Correct URL
+        const websocketUrl = `ws://${window.location.host}/ws/task-progress/${taskId}`; // Dynamic URL
         const websocket = new WebSocket(websocketUrl);
 
         websocket.onopen = function() {
@@ -190,11 +190,31 @@ document.addEventListener('DOMContentLoaded', function() {
                     scrapedData = messageData;  // Store the data
                     taskProgressBar.style.width = '100%';
                     taskProgressBar.setAttribute('aria-valuenow', 100);
-                    taskProgressMessage.textContent = 'URLs fetched successfully.';
-                    if(resultsTabButton){
+
+
+                    if (scrapedData && scrapedData.results && scrapedData.results.length > 0) {
+                        taskProgressMessage.textContent = 'URLs fetched successfully.';
                         resultsTabButton.disabled = false;
                         const tab = new bootstrap.Tab(resultsTabButton);
                         tab.show();
+                        //Gets current filter to display on the filter active section
+                        const currentFilters = getCurrentFilters();
+                        currentFilters.content_search = activeContentSearches; // Add content searches
+                        displayActiveFilters(currentFilters);
+                        // Display initial page and create pagination:
+                        displayScrapedData(scrapedData, 1, pageSize);
+                    } else {
+                        taskProgressMessage.textContent = 'No URLs found matching your filters.';
+                        resultsTabButton.disabled = true; // Keep results tab disabled or disable it if it was enabled before
+                        const resultsList = document.getElementById('scrapedResultsList');
+                        if (resultsList) {
+                            resultsList.innerHTML = '<div class="list-group-item">No URLs found matching your filters. Please adjust your filters and try again.</div>';
+                        }
+                        // Optionally clear pagination if it exists
+                        const paginationContainer = document.querySelector('.pagination');
+                        if (paginationContainer) {
+                            paginationContainer.innerHTML = '';
+                        }
                     }
 
 
@@ -202,12 +222,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         taskProgressModal.hide();
                         websocket.close();
                     }, 2000);
-                    //Gets current filter to display on the filter active section
-                    const currentFilters = getCurrentFilters();
-                    currentFilters.content_search = activeContentSearches; // Add content searches
-                    displayActiveFilters(currentFilters);
-                    // Display initial page and create pagination:
-                    displayScrapedData(scrapedData, 1, pageSize);
 
 
                 } else {
