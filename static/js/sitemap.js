@@ -184,6 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data.type === "init") {
                     const totalUrls = data.total_urls || 0;
                     const filteredUrls = data.filtered_urls || 0;
+                    taskProgressBar.setAttribute('aria-valuenow', 0);
                     taskProgressMessage.textContent = `Fetching URLs... Found ${totalUrls} total URLs. ${filteredUrls} URLs will be processed.`;
                     updateTotalAndFilteredUrls(totalUrls, filteredUrls); // Update UI
                 } else if (data.type  === "done") {
