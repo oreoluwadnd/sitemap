@@ -192,7 +192,7 @@ def sitemap_scrape(self, url: str, filters: dict):
     try:
         # Fetch and parse sitemap
         print(filters)
-        xml_content = fetch_sitemap(url)
+        xml_content = fetch_sitemap(url )
         if not xml_content:
             return {"error": "Failed to fetch sitemap"}
         

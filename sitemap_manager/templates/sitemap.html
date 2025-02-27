@@ -161,6 +161,7 @@
                                     <div class="col-xl-8">
                                         <form id="sitemapForm" class="bg-body-tertiary rounded">
                                             <!-- URL sitemap -->
+                                            <!-- URL sitemap -->
                                             <div class="bg-body rounded p-4 mb-4">
                                                 <h6 class="mb-3">Sitemap URL</h6>
                                                 <div class="input-group">
@@ -178,6 +179,12 @@
                                                 <div class="collapse mt-2" id="urlCheckMessage">
                                                     <div class="text-success small">
                                                         Sitemap found and loaded successfully.
+                                                    </div>
+                                                </div>
+                                                <!-- ADD THIS ERROR MESSAGE DIV -->
+                                                <div class="collapse mt-2" id="urlErrorMessage">
+                                                    <div class="text-danger small">
+                                                        <!-- Error message will be placed here -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -328,7 +335,7 @@
                                         <div class="col-sm-6 col-xl-3">
                                             <div class="bg-body rounded p-4 text-center">
                                                 <h6 class="text-muted mb-2">Selected</h6>
-                                                <h3 id="selectedUrls" class="mb-0">0</h3>  <!-- Add this ID -->
+                                                <h3 id="selectedUrls" class="mb-0">0</h3> <!-- Add this ID -->
                                             </div>
                                         </div>
                                         <div class="col-sm-6 col-xl-3">
@@ -381,13 +388,14 @@
                                 <!-- Pagination -->
                                 <div class="p-4 border-top">
                                     <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
-                                        <small id="showingItemsText" class="text-muted">Showing 1-10 of 567 items</small>
-                                       <!-- Pagination -->
-<nav aria-label="Page navigation">
-    <ul class="pagination pagination-sm mb-0" id="paginationContainer">
-        <!-- Pagination links will be dynamically added here -->
-    </ul>
-</nav>
+                                        <small id="showingItemsText" class="text-muted">Showing 1-10 of 567
+                                            items</small>
+                                        <!-- Pagination -->
+                                        <nav aria-label="Page navigation">
+                                            <ul class="pagination pagination-sm mb-0" id="paginationContainer">
+                                                <!-- Pagination links will be dynamically added here -->
+                                            </ul>
+                                        </nav>
                                     </div>
 
                                     <div class="d-flex justify-content-center">
@@ -517,6 +525,44 @@
                     <p id="taskProgressMessage" class="text-body-secondary mb-0">
                         Loading...
                     </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- **INSERT MESSAGE MODAL AND ERROR MODAL HTML HERE** -->
+    <!-- Message Modal -->
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="messageModalTitle">Message</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="messageModalBody">
+                    <!-- Message content will be placed here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-blue">
+                    <h5 class="modal-title" id="errorModalTitle">Error</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-" id="errorModalBody">
+                    <!-- Error message content will be placed here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary btn-primary text-white"
+                        data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

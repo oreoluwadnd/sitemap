@@ -24,10 +24,6 @@ def validate_sitemap(url):
         return False
     print('Starting check ')
     try:
-        
-        head_response = requests.head(url, timeout=0.5)
-        if head_response.status_code != 200:
-            return False
         response = requests.get(url, timeout=1)
         print("done check")
         if response.status_code != 200:

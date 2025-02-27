@@ -26,6 +26,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const taskProgressBar = document.getElementById('taskProgressBar');
     const taskProgressMessage = document.getElementById('taskProgressMessage');
 
+    // Generic Modal Elements (Add these to your HTML if not already present - example at the end)
+    const messageModalElement = document.getElementById('messageModal');
+    const messageModalTitle = document.getElementById('messageModalTitle');
+    const messageModalBody = document.getElementById('messageModalBody');
+    const messageModal = new bootstrap.Modal(messageModalElement);
+
+    const errorModalElement = document.getElementById('errorModal');
+    const errorModalTitle = document.getElementById('errorModalTitle');
+    const errorModalBody = document.getElementById('errorModalBody');
+    const errorModal = new bootstrap.Modal(errorModalElement);
+
+
     // Content Search Elements
     const contentSearchInput = document.querySelector('#results input[type="text"]');
     const contentSearchButton = document.querySelector('#results button.btn-primary'); // Button, not just any button
@@ -34,7 +46,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const headingCheckbox = document.querySelector('#results .form-check:nth-child(3) input');
     const bodyCheckbox = document.querySelector('#results .form-check:nth-child(4) input');
 
-
+    const urlErrorMessage = document.getElementById('urlErrorMessage'); // Get error message element
+    const urlErrorMessageText = urlErrorMessage.querySelector('.text-danger'); // Get text area inside
     //Active Filter
     const activeFiltersContainer = document.querySelector('#results .bg-body.rounded.p-4.mb-4:nth-child(2) .d-flex.flex-wrap.gap-2');
     // Global variable to store the scraped data
@@ -51,6 +64,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const pageSize = 5; // Items per page.  Make this a constant.
 
+    // --- Helper Functions (Modals) ---
+    function showMessageModal(title, message) {
+        messageModalTitle.textContent = title;
+        messageModalBody.textContent = message;
+        messageModal.show();
+    }
+
+    function showErrorModal(title, message) {
+        errorModalTitle.textContent = title;
+        errorModalBody.textContent = message;
+        errorModal.show();
+    }
+
+
     // --- Helper Function (to avoid repetition) ---
 
     function resetFilterUI() {
@@ -66,7 +93,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const sitemapUrl = sitemapUrlInput.value;
 
         if (!sitemapUrl) {
-            alert('Please enter a Sitemap URL.');
+            urlErrorMessageText.textContent = 'Please enter a Sitemap URL.'; // Set error text
+            urlCheckMessage.classList.remove('show'); // Hide success message
+            urlErrorMessage.classList.add('show');   // Show error message
+
             return;
         }
 
@@ -83,26 +113,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (data.is_valid_sitemap) {
                     urlCheckMessage.classList.add('show');
+                    urlErrorMessage.classList.remove('show'); // Ensure error message is hidden
                     timePriorityFilters.classList.add('show');
                     urlFrequencyFilters.classList.add('show');
                     applyFiltersBtn.disabled = false;
                 } else {
                     resetFilterUI();
-                    alert('Invalid Sitemap URL.');
+                    urlCheckMessage.classList.remove('show'); // Hide success message
+                    urlErrorMessage.classList.add('show');   // Show error message
+                    urlErrorMessageText.textContent = 'Invalid Sitemap URL.'; // Set error text
+                    // showErrorModal('Invalid Sitemap', 'Invalid Sitemap URL.'); // No need for modal alert anymore
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('An error occurred while validating the Sitemap URL.');
+                resetFilterUI();
+                urlCheckMessage.classList.remove('show'); // Hide success message
+                urlErrorMessage.classList.add('show');   // Show error message
+                urlErrorMessageText.textContent = 'An error occurred while validating the Sitemap URL.'; // Set error text
+                // showErrorModal('Error', 'An error occurred while validating the Sitemap URL.'); // No need for modal alert anymore
                 checkBtnText.textContent = 'Check';
                 checkBtnSpinner.classList.add('d-none');
                 checkSitemapBtn.disabled = false;
-                resetFilterUI();
+
+
             });
     });
 
     // Sitemap URL Input (Hide filters on change)
-    sitemapUrlInput.addEventListener('input', resetFilterUI);
+    sitemapUrlInput.addEventListener('input', function() {
+        resetFilterUI(); // Hide filters (existing functionality)
+        urlCheckMessage.classList.remove('show'); // Hide success message on input change
+        urlErrorMessage.classList.remove('show'); // Hide error message on input change
+    });
 
 
     // Apply Filters Buttos
@@ -148,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
             applyFiltersBtn.disabled = false;
 
             if (data.error) {
-                alert('Error from backend: ' + data.error);
+                showErrorModal('Something went wrong', 'Pls try again'); // Modal instead of alert
             } else {
                 taskProgressModal.show();
                 connectWebSocket(data.task_id);
@@ -156,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('An error occurred while sending data.');
+            showErrorModal('Something went wrong', 'Pls try again'); // Modal instead of alert
             applyFiltersBtnText.innerHTML = '<i class="bi bi-funnel"></i> Apply Filters';
             document.getElementById('applyFiltersBtnSpinner').classList.add('d-none');
             applyFiltersBtn.disabled = false;
@@ -255,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Helper Functions ---
     function updateTotalAndFilteredUrls(totalUrls, filteredUrls) {
         document.getElementById("totalUrls").textContent = totalUrls;
-        document.getElementById("filteredUrls").textContent = filteredUrls;
+        // document.getElementById("filteredUrls").textContent = filteredUrls; // No longer update this element here.
     }
 
     function displayScrapedData(data, page = 1, pageSize = 5) {
@@ -266,6 +309,7 @@ document.addEventListener('DOMContentLoaded', function() {
             resultsList.innerHTML = '<div class="list-group-item">No data to display.</div>';
             updateSelectedCount(); // Update count even with no data
             addPagination(0, 1, pageSize); // Show empty pagination
+            updateFilteredCount(0); // Update filtered count to 0
             return;
         }
 
@@ -279,6 +323,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if(showingText){
             showingText.textContent = `Showing ${startIndex + 1}-${endIndex} of ${data.stats.filtered} items`;
         }
+        updateFilteredCount(data.stats.filtered); // Update the filtered count here
 
         //Update the average priority.
         document.getElementById("avgPriority").textContent = data.stats.avg_priority;
@@ -316,6 +361,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         updateSelectedCount(); // Update "Selected" count AFTER displaying data
         addPagination(data.stats.filtered, page, pageSize);
+    }
+
+    function updateFilteredCount(count) {
+        const filteredCountElement = document.getElementById("filteredUrls");
+        if (filteredCountElement) {
+            filteredCountElement.textContent = count;
+        }
     }
     //Function to create pagination
     function addPagination(totalItems, currentPage = 1, pageSize = 5){
@@ -437,9 +489,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         // Content Search Filters (plural)
         if (filters.content_search && filters.content_search.length > 0) {
-            filters.content_search.forEach(term => {
+            filters.content_search.forEach(term => { // Iterate over each term
                 const contentFilterText = `Content: "${term}" (${getContentFilterTypes()})`;
                 const contentBadge = createFilterBadge('search', contentFilterText, 'secondary', true); // Removable
+                contentBadge.dataset.searchTerm = term; // Store the search term on the badge
                 activeFiltersContainer.appendChild(contentBadge);
             });
         }
@@ -511,11 +564,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function removeFilter(badgeElement) {
       const filterType = badgeElement.querySelector('.btn-close').dataset.filterType;
         if (filterType === 'search') {
-            // Get the search term from the badge text.  More robust than relying on input field.
-            const searchTerm = badgeElement.querySelector('span').textContent.match(/"([^"]+)"/)[1]; // Extract term
+            // Get the search term from the badge's data attribute, not text content
+            const searchTermToRemove = badgeElement.dataset.searchTerm;
 
             // Remove the term from the activeContentSearches array
-             activeContentSearches = activeContentSearches.filter(term => term !== searchTerm);
+             activeContentSearches = activeContentSearches.filter(term => term !== searchTermToRemove);
 
             //Remove the badge
               badgeElement.remove();
@@ -630,7 +683,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const selectedUrls = Array.from(selectedItems); // Convert Set to Array for easier use
 
             if (selectedUrls.length === 0) {
-                alert('Please select at least one URL to process.');
+                showMessageModal('No URLs Selected', 'Please select at least one URL to process.'); // Modal instead of alert
                 return; // Exit if nothing is selected
             }
 
@@ -719,6 +772,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedCountElement = document.getElementById("selectedUrls");
         if (selectedCountElement) {
             selectedCountElement.textContent = selectedItems.size; // Correctly use selectedItems.size
+        }
+    }
+    // Function to update the displayed filtered count in the UI
+    function updateFilteredCount(count) {
+        const filteredCountElement = document.getElementById("filteredUrls"); // Make sure you have an element with this ID in your HTML to display the count.
+        if (filteredCountElement) {
+            filteredCountElement.textContent = count;
         }
     }
 });
