@@ -1,0 +1,57 @@
+.html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Widget</title>
+    <link rel="stylesheet" href="css/chat-styles.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Заголовок -->
+        <header class="chat-header">
+            <h1>HelpBot AI</h1>
+            <button class="refresh-btn">↻</button>
+        </header>
+
+        <!-- Сообщения -->
+        <div class="chat-messages">
+            <div class="message left">
+                <div class="message-content">
+                    Чем я могу помочь?
+                </div>
+            </div>
+
+            <div class="message right">
+                <div class="message-content">
+                    Как узнать прогноз погоды?
+                </div>
+            </div>
+
+            <div class="message left">
+                <div class="message-content">
+                    <p>Чтобы узнать прогноз погоды, вы можете:</p>
+                    <ul>
+                        <li>Использовать погодные сайты</li>
+                        <li>Установить погодное приложение</li>
+                        <li>Проверить местные новости</li>
+                    </ul>
+                    <div class="message-footer">
+                        <button class="sources-btn">Источники▽</button>
+                        <div class="reaction-buttons">
+                            <button class="reaction-btn">👍</button>
+                            <button class="reaction-btn">👎</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Поле ввода -->
+        <div class="chat-input">
+            <input type="text" placeholder="Введите сообщение...">
+        </div>
+    </div>
+</body>
+</html>

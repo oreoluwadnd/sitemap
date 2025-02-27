@@ -1,0 +1,95 @@
+/* Общие стили для виджета */
+.chat-widget {
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+  }
+  
+  /* Шапка чата */
+  .chat-header {
+    background-color: #f4a641; /* Можно настроить по вкусу */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: #563d07;
+    font-weight: bold;
+  }
+  
+  .refresh-icon {
+    cursor: pointer;
+  }
+  
+  /* Основная область чата */
+  .chat-body {
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  /* Стили для сообщений */
+  .message {
+    width: fit-content;
+    padding: 8px 12px;
+    border-radius: 14px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    max-width: 100%;
+  }
+  
+  .user-message {
+    background-color: #f8f9fa;
+    align-self: flex-start;
+    border-radius: 14px 14px 14px 0;
+  }
+  
+  .bot-message {
+    background-color: #fff2d6;
+    align-self: flex-start;
+    border-radius: 14px 14px 0 14px;
+  }
+  
+  /* Небольшой блок иконок под ответом бота */
+  .message-footer {
+    font-size: 1.1rem;
+  }
+  
+  /* Футер и поле ввода */
+  .chat-footer {
+    border-top: 1px solid #ccc;
+    background: #fff;
+  }
+  
+  .message-input {
+    border: none;
+    box-shadow: none;
+    font-size: 0.95rem;
+  }
+  
+  .message-input:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  
+  .send-button {
+    background: none;
+    border: none;
+    color: #f4a641;
+    font-size: 1.2rem;
+    transition: color 0.2s;
+    padding: 6px 8px;
+  }
+  
+  .send-button:hover {
+    color: #d9892d;
+  }
+  
+  /* Адаптивность: на небольших экранах растягиваем на 95% */
+  @media (max-width: 576px) {
+    .chat-widget {
+      max-width: 95%;
+      margin: 10px auto;
+    }
+  }

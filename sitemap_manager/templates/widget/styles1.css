@@ -1,0 +1,375 @@
+/*
+* Chat Application Styles
+* Using Open Props CSS Custom Properties (https://open-props.style)
+* 
+* Table of Contents:
+* 1. Custom Properties & Root Styles
+* 2. Layout & Container
+* 3. Header Section
+* 4. Messages Section
+* 5. Input Section
+* 6. Utility Components
+* 7. Media Queries
+* 8. Dark Theme
+*/
+
+/* ==========================================================================
+   1. Custom Properties & Root Styles
+   ========================================================================== */
+
+:root {
+    /* Brand Colors - можно легко изменить тему, меняя только эти переменные */
+    --brand-color: var(--orange-3);
+    --brand-light: var(--orange-1);
+}
+
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base Styles */
+body {
+    font-family: var(--font-sans);
+    background-color: var(--gray-1);
+}
+
+/* ==========================================================================
+   2. Layout & Container
+   ========================================================================== */
+
+.chat-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--gray-0);
+    box-shadow: var(--shadow-2);
+}
+
+/* ==========================================================================
+   3. Header Section
+   ========================================================================== */
+
+.chat-header {
+    background-color: var(--brand-color);
+    padding: var(--size-3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--gray-9);
+}
+
+.chat-header .header-title {
+    display: flex;
+    align-items: center;
+    gap: var(--size-2);
+}
+
+.chat-header i {
+    font-size: var(--font-size-3);
+}
+
+.chat-header h3 {
+    font-size: var(--font-size-3);
+    font-weight: var(--font-weight-5);
+}
+
+.refresh-btn {
+    background: none;
+    border: none;
+    font-size: var(--font-size-3);
+    cursor: pointer;
+    color: var(--gray-9);
+}
+
+/* ==========================================================================
+   4. Messages Section
+   ========================================================================== */
+
+/* Messages Container */
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--size-4);
+}
+
+/* Message Wrapper */
+.message {
+    margin-bottom: var(--size-4);
+    display: flex;
+}
+
+.message.left {
+    justify-content: flex-start;
+}
+
+.message.right {
+    justify-content: flex-end;
+}
+
+/* Message Content */
+.message-content {
+    position: relative;
+    max-width: 70%;
+    padding: var(--size-3) var(--size-4);
+    font-size: var(--font-size-1);
+    line-height: var(--font-lineheight-3);
+    color: var(--gray-9);
+}
+
+/* Message Variants */
+.message.left .message-content {
+    background-color: var(--brand-light);
+    border-radius: var(--radius-4) var(--radius-4) var(--radius-4) var(--radius-2);
+}
+
+.message.right .message-content {
+    background-color: var(--gray-0);
+    border: 1px solid var(--gray-3);
+    border-radius: var(--radius-4) var(--radius-4) var(--radius-2) var(--radius-4);
+}
+
+/* Message Lists */
+.message-content ul {
+    margin-left: var(--size-4);
+    margin-top: var(--size-2);
+}
+
+.message-content li {
+    margin-bottom: var(--size-1);
+}
+
+/* ==========================================================================
+   5. Copy Button Component
+   ========================================================================== */
+
+.copy-btn {
+    position: absolute;
+    top: 50%;
+    background: none;
+    border: none;
+    color: var(--gray-5);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity var(--transition-ease-out);
+    padding: var(--size-2);
+    transform: translateY(-50%);
+}
+
+/* Copy Button Positioning */
+.message.left .message-content .copy-btn {
+    left: 100%;
+    margin-left: var(--size-1);
+}
+
+.message.right .message-content .copy-btn {
+    right: 100%;
+    margin-right: var(--size-1);
+}
+
+/* Copy Button States */
+.message-content:hover .copy-btn {
+    opacity: 1;
+}
+
+.copy-btn:hover {
+    color: var(--brand-color);
+}
+
+/* ==========================================================================
+   6. Input Section
+   ========================================================================== */
+
+.chat-input {
+    padding: var(--size-3);
+    display: flex;
+    align-items: center;
+    gap: var(--size-3);
+    border-top: 1px solid var(--gray-3);
+    background-color: var(--gray-0);
+}
+
+/* Main Input Field */
+.chat-input input {
+    flex: 1;
+    padding: var(--size-3) var(--size-4);
+    border: 1px solid var(--gray-3);
+    border-radius: var(--radius-round);
+    font-size: var(--font-size-2);
+    font-family: var(--font-sans);
+    background-color: var(--gray-0);
+    color: var(--gray-9);
+    transition: all var(--transition-ease-out);
+}
+
+.chat-input input::placeholder {
+    font-size: var(--font-size-1);
+}
+
+.chat-input input:focus {
+    outline: none;
+    box-shadow: 0 0 0 var(--size-1) color-mix(in srgb, var(--brand-color) 40%, transparent);
+    border-color: transparent;
+}
+
+/* Action Buttons */
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--size-7);
+    height: var(--size-7);
+    border: 1px solid var(--gray-3);
+    border-radius: var(--radius-round);
+    background-color: var(--gray-0);
+    color: var(--gray-6);
+    font-size: var(--font-size-2);
+    cursor: pointer;
+    transition: all var(--transition-ease-out);
+    flex-shrink: 0;
+}
+
+.action-btn:hover {
+    background-color: var(--gray-1);
+}
+
+.action-btn i {
+    font-size: var(--font-size-2);
+}
+
+/* Send Button */
+.send-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--size-7);
+    height: var(--size-7);
+    border: none;
+    background: none;
+    color: var(--brand-color);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.send-btn i {
+    font-size: var(--font-size-3);
+}
+
+/* ==========================================================================
+   7. Utility Components
+   ========================================================================== */
+
+/* Resize Handle */
+.resize-handle {
+    position: absolute;
+    bottom: var(--size-1);
+    right: var(--size-1);
+    width: var(--size-4);
+    height: var(--size-4);
+    cursor: se-resize;
+    color: var(--gray-5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--layer-1);
+}
+
+.resize-handle i {
+    font-size: var(--font-size-2);
+    transform: rotate(-45deg);
+}
+
+/* ==========================================================================
+   8. Responsive Design
+   ========================================================================== */
+
+@media (--md-n-below) {
+    /* Content Adjustments */
+    .message-content {
+        max-width: 85%;
+    }
+    
+    /* Header Adjustments */
+    .chat-header h3 {
+        font-size: var(--font-size-2);
+    }
+    
+    /* Input Adjustments */
+    .chat-input {
+        padding: var(--size-2);
+    }
+
+    /* Copy Button Adjustments */
+    .message.left .copy-btn {
+        right: -30px;
+    }
+    
+    .message.right .copy-btn {
+        left: -30px;
+    }
+}
+
+/* ==========================================================================
+   9. Dark Theme
+   ========================================================================== */
+
+[data-theme="dark"] {
+    /* Base Dark Theme */
+    body {
+        background-color: var(--gray-9);
+    }
+
+    .chat-container {
+        background-color: var(--gray-8);
+    }
+
+    /* Messages Dark Theme */
+    .message-content {
+        color: var(--gray-1);
+    }
+
+    .message.left .message-content {
+        background-color: color-mix(in srgb, var(--brand-color) 15%, var(--gray-8));
+    }
+
+    .message.right .message-content {
+        background-color: var(--gray-7);
+        border-color: var(--gray-6);
+    }
+
+    /* Input Dark Theme */
+    .chat-input {
+        border-color: var(--gray-7);
+        background-color: var(--gray-8);
+    }
+
+    .chat-input input {
+        background-color: var(--gray-7);
+        border-color: var(--gray-6);
+        color: var(--gray-1);
+    }
+
+    /* Buttons Dark Theme */
+    .action-btn {
+        background-color: var(--gray-7);
+        border-color: var(--gray-6);
+        color: var(--gray-3);
+    }
+
+    .action-btn:hover {
+        background-color: var(--gray-6);
+    }
+
+    .copy-btn {
+        color: var(--gray-4);
+    }
+    
+    .copy-btn:hover {
+        color: var(--brand-color);
+    }
+}

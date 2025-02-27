@@ -1,0 +1,88 @@
+footer {
+    user-select: none;
+    margin-bottom: var(--size-3);
+}
+
+footer textarea {
+    width: 100%;
+    margin-bottom: var(--size-3);
+}
+
+footer #controls{
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+}
+
+footer #slogan {
+    position: absolute;
+    left: 50%;
+    bottom: 8px;
+    margin: 0;
+    margin-left:-5em;
+    font-size: var(--font-size-0);
+    font-weight: bold;
+    user-select: none;
+}
+
+@keyframes bblFadInOut {
+    0%, 80%, 100% { box-shadow: 0 2.5em 0 -10px }
+    40% { box-shadow: 0 25px 0 0 }
+}
+
+#loader {
+    position: relative;
+    margin-top: -20px;
+    text-align: center;
+    display: block;
+}
+#loader span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    animation-fill-mode: both;
+    animation: bblFadInOut 2s infinite ease-in-out;
+
+    color: var(--accent-color);
+    font-size: 10px;
+    text-indent: -9999em;
+    transform: translateZ(0);
+}
+#loader span:nth-child(2n) {
+    animation-delay: 0.20s;
+}
+#loader span:nth-child(3n) {
+    animation-delay: 0.40s;
+}
+
+
+main {
+    overflow-y: auto;
+}
+main .message{
+    clear: both;
+    padding: 0.5em 1em;
+    margin-bottom: 1em;
+    border-radius: 5px;
+}
+main .message.role-user {
+    float: right;
+    background-color: var(--surface-2);
+}
+main .message.role-assistant {
+    background-color: var(--surface-3);
+}
+main .message.role-system {
+    background-color: var(--surface-3);
+}
+
+main .message p,
+main .message li,
+main .message ul,
+main .message ol {
+    line-height: 1.2em;
+    margin: 0.5em 0;
+}
+main .message > li {
+    margin-left: 1em;
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Template</title>
+    <!-- Только основные переменные Open Props -->
+    <link rel="stylesheet" href="https://unpkg.com/open-props"/>
+    <!-- Остальные стили -->
+    <link rel="stylesheet" href="styles1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Header -->
+        <header class="chat-header">
+            <div class="header-title">
+                <i class="fas fa-blog"></i>
+                <h3>blogger.com.ua</h3>
+            </div>
+            <button class="refresh-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </header>
+
+        <!-- Chat Messages -->
+        <div class="chat-messages">
+    <div class="message left">
+        <div class="message-content">
+            Чем я могу помочь?
+            <button class="copy-btn">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="message right">
+        <div class="message-content">
+            Покажи разделы документа "Исследование рынка".
+            <button class="copy-btn">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="message left">
+        <div class="message-content">
+            Документ содержит следующие основные разделы:
+            <ul>
+                <li>Введение</li>
+                <li>Методология исследования</li>
+                <li>Результаты анализа</li>
+                <li>Выводы и рекомендации</li>
+            </ul>
+            <button class="copy-btn">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="message right">
+        <div class="message-content">
+            что содержится в разделе методология?
+            <button class="copy-btn">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="message left">
+        <div class="message-content">
+            В разделе методология описаны:
+            - Подходы к сбору данных
+            - Критерии анализа
+            - Используемые инструменты
+            - Временные рамки исследования
+            <button class="copy-btn">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+			<!-- Chat Input -->
+		<div class="chat-input">
+			<button class="action-btn">
+				<i class="fas fa-plus"></i>
+			</button>
+			<input type="text" placeholder="Сообщить ChatGPT">
+			<button class="send-btn">
+				<i class="fas fa-arrow-right"></i>
+			</button>
+		</div>
+
+
+        <!-- Resize Handle -->
+        <div class="resize-handle">
+            <i class="fas fa-angle-down"></i>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,555 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="HelpBot AI - AI-powered assistants for your business">
+    <meta name="author" content="HelpBot AI">
+    <title>Sitemap Processor | HelpBot AI</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .nav-link {
+            line-height: 1.5rem;
+        }
+
+        .bi {
+            font-size: 1.1rem;
+            vertical-align: -0.125em;
+        }
+    </style>
+
+<body class="d-flex flex-column min-vh-100">
+    <!-- Header -->
+    <div class="container-xl px-0">
+        <!-- Header -->
+        <header class="navbar navbar-expand-lg bg-white border-bottom sticky-top px-3" style="z-index: 1100;">
+            <nav class="container-fluid px-0" aria-label="Main navigation">
+                <!-- Brand -->
+                <a class="navbar-brand d-flex align-items-center" href="/en/">
+                    <div class="bg-secondary text-white rounded d-flex align-items-center justify-content-center"
+                        style="width:36px;height:36px">
+                        <span class="text-white fw-bold">H</span>
+                    </div>
+                    <strong class="ms-2">HelpBot AI</strong>
+                </a>
+
+                <!-- Toggle button -->
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Offcanvas content -->
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvas"
+                    aria-labelledby="navbarOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="navbarOffcanvasLabel">HelpBot AI</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body d-flex flex-column flex-lg-row align-items-stretch gap-3">
+                        <!-- Navigation links -->
+                        <ul class="navbar-nav flex-grow-1 mb-2 mb-lg-0 justify-content-end">
+                            <li class="nav-item me-3">
+                                <a class="nav-link px-2" href="/en/assistants/">
+                                    <i class="bi bi-stars"></i>
+                                    <span class="ms-1">My Assistants</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link px-2" href="/en/contact/">
+                                    <i class="bi bi-envelope"></i>
+                                    <span class="ms-1">Contact Us</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- Language selector -->
+                        <form class="d-flex mb-3 mb-lg-0" method="post" action="/core/setlang/">
+                            <select class="form-select form-select-sm" aria-label="Select Language" name="language"
+                                onchange="this.form.submit()">
+                                <option value="en" selected>English</option>
+                                <option value="ja">日本語</option>
+                                <option value="uk">Українська</option>
+                            </select>
+                        </form>
+
+                        <!-- Theme toggle and profile -->
+                        <button class="btn btn-link p-0 mb-3 mb-lg-0" id="themeToggleBtn" title="Toggle theme"
+                            aria-label="Toggle theme">
+                            <i class="bi bi-moon-stars"></i>
+                        </button>
+                        <a href="/en/user/profile/" class="d-flex align-items-center text-decoration-none">
+                            <div class="bg-secondary rounded" style="width:40px;height:40px"></div>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Container for main content -->
+        <div class="container-fluid px-0">
+            <div class="row flex-nowrap px-3">
+                <!-- Sidebar -->
+                <div class="col-auto col-lg-3 px-0 bg-dark">
+                    <aside class="sticky-top z-2">
+                        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-4 min-vh-100">
+                            <ul class="nav nav-pills flex-column align-items-center align-items-sm-start w-100"
+                                id="menu">
+                                <li class="nav-item w-100"><a href="Assistants.html" class="nav-link px-2 text-white">
+                                        <i class="bi bi-stars"></i> <span class="ms-2 d-none d-lg-inline">My
+                                            Assistants</span> </a>
+                                </li>
+                                <li class="nav-item w-100"><a href="profile.html" class="nav-link px-2 text-white"> <i
+                                            class="bi bi-person-gear"></i> <span class="ms-2 d-none d-lg-inline">My
+                                            Profile</span> </a>
+                                </li>
+                                <li class="nav-item w-100"><a href="#" class="nav-link px-2 text-white"
+                                        data-bs-toggle="modal" data-bs-target="#signOutModal"> <i
+                                            class="bi bi-box-arrow-right"></i> <span
+                                            class="ms-2 d-none d-lg-inline">Sign Out</span> </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+
+                <!-- Main Content -->
+                <div class="col overflow-auto">
+                    <main class="px-3 pt-4">
+                        <!-- Header -->
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h1 class="h2 mb-0">Sitemap Wizard</h1>
+                            <h1 class="h2 mb-0"></h1>
+                            <!-- Кнопка появляется только при активной вкладке Results -->
+                            <!-- button type="button" class="btn btn-primary d-none" id="processSelectedBtn" data-bs-toggle="modal" data-bs-target="#processingModal">
+                                    <i class="bi bi-check-lg"></i> Process Selected
+                                </button -->
+                        </div>
+                        <!-- Tabs -->
+                        <ul class="nav nav-tabs mb-4">
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#filters"
+                                    onclick="document.getElementById('processSelectedBtn').classList.add('d-none')"><i
+                                        class="bi bi-funnel"></i> Configure Filters
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#results"
+                                    id="reviewResultsTabButton" disabled><i class="bi bi-list-check"></i> Review
+                                    Results</button>
+                            </li>
+                        </ul>
+                        <!-- Tab Content -->
+                        <div class="tab-content">
+                            <!-- Filters Tab -->
+                            <div class="tab-pane fade show active" id="filters">
+                                <div class="row">
+                                    <div class="col-xl-8">
+                                        <form id="sitemapForm" class="bg-body-tertiary rounded">
+                                            <!-- URL sitemap -->
+                                            <div class="bg-body rounded p-4 mb-4">
+                                                <h6 class="mb-3">Sitemap URL</h6>
+                                                <div class="input-group">
+                                                    <input type="url" class="form-control form-control-sm"
+                                                        id="sitemapUrl" placeholder="https://example.com/sitemap.xml"
+                                                        required>
+                                                    <button class="btn btn-primary btn-sm ms-2" type="button"
+                                                        id="checkSitemapBtn">
+                                                        <span id="checkBtnText">Check</span>
+                                                        <span id="checkBtnSpinner"
+                                                            class="spinner-border spinner-border-sm d-none"
+                                                            role="status" aria-hidden="true"></span>
+                                                    </button>
+                                                </div>
+                                                <div class="collapse mt-2" id="urlCheckMessage">
+                                                    <div class="text-success small">
+                                                        Sitemap found and loaded successfully.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Фильтры по времени и приоритету -->
+                                            <div class="bg-body rounded p-4 mb-4 collapse" id="timePriorityFilters">
+                                                <h6 class="mb-3">Time and Priority Filters</h6>
+                                                <div class="row g-4">
+                                                    <div class="col-md-6">
+                                                        <!-- Фильтр по дате -->
+                                                        <div class="mb-3">
+                                                            <label class="form-label small fw-semibold">Last Modified
+                                                                Range</label>
+                                                            <div class="input-group input-group-sm">
+                                                                <input type="date" class="form-control">
+                                                                <span class="input-group-text">to</span>
+                                                                <input type="date" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <!-- Фильтр по приоритету -->
+                                                        <div class="mb-3">
+                                                            <label class="form-label small fw-semibold">Priority
+                                                                Range</label>
+                                                            <div class="input-group input-group-sm">
+                                                                <input type="number" class="form-control" min="0"
+                                                                    max="1" step="0.1" value="0">
+                                                                <span class="input-group-text">to</span>
+                                                                <input type="number" class="form-control" min="0"
+                                                                    max="1" step="0.1" value="1">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Фильтры по URL и частоте -->
+                                            <div class="bg-body rounded p-4 mb-4 collapse" id="urlFrequencyFilters">
+                                                <h6 class="mb-3">URL and Frequency Filters</h6>
+                                                <div class="row g-4">
+                                                    <div class="col-md-6">
+                                                        <!-- Фильтр по частоте -->
+                                                        <div class="mb-3">
+                                                            <label class="form-label small fw-semibold">Change
+                                                                Frequency</label>
+                                                            <select class="form-select form-select-sm">
+                                                                <option value="">Any</option>
+                                                                <option>Always</option>
+                                                                <option>Hourly</option>
+                                                                <option>Daily</option>
+                                                                <option>Weekly</option>
+                                                                <option>Monthly</option>
+                                                                <option>Yearly</option>
+                                                                <option>Never</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <!-- Фильтр по URL -->
+                                                        <div class="mb-3">
+                                                            <label class="form-label small fw-semibold">URL
+                                                                Pattern</label>
+                                                            <input type="text" class="form-control form-control-sm"
+                                                                placeholder="e.g., /blog/, /products/">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Кнопки действий -->
+                                            <div class="bg-body-tertiary rounded p-4">
+                                                <div class="d-flex gap-2">
+                                                    <button type="button" class="btn btn-primary" id="applyFiltersBtn">
+                                                        <span id="applyFiltersBtnText"><i class="bi bi-funnel"></i>
+                                                            Apply Filters</span>
+                                                        <span id="applyFiltersBtnSpinner"
+                                                            class="spinner-border spinner-border-sm d-none"
+                                                            role="status" aria-hidden="true"></span>
+                                                    </button>
+                                                    <button type="reset" class="btn btn-outline-secondary">
+                                                        <i class="bi bi-arrow-counterclockwise"></i> Reset
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Results Tab -->
+                            <!-- Results Tab -->
+                            <div class="tab-pane fade" id="results">
+                                <!-- Top section with filters and statistics -->
+                                <div class="bg-body-tertiary rounded p-4 mb-4">
+                                    <!-- Content Search Options -->
+                                    <div class="bg-body rounded p-4 mb-4">
+                                        <h5 class="mb-3">Content Search</h5>
+                                        <div class="mb-3">
+                                            <label class="form-label small fw-semibold">Search Terms</label>
+                                            <!-- Add input group with button -->
+                                            <div class="input-group input-group-sm mb-2">
+                                                <input type="text" class="form-control"
+                                                    placeholder="Enter keywords to search in page content">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="bi bi-search"></i> Apply
+                                                </button>
+                                            </div>
+                                            <!-- Checkboxes as is -->
+                                            <div class="d-flex gap-4">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" checked>
+                                                    <label class="form-check-label small">Title</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" checked>
+                                                    <label class="form-check-label small">Meta Description</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" checked>
+                                                    <label class="form-check-label small">H1-5</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" checked>
+                                                    <label class="form-check-label small">Body Text</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Active Filters -->
+                                    <!-- Active Filters -->
+                                    <div class="bg-body rounded p-4 mb-4">
+                                        <h5 class="mb-3">Active Filters</h5>
+                                        <div class="d-flex flex-wrap gap-2">
+                                            <!-- Filter badges will be dynamically added here -->
+                                        </div>
+                                    </div>
+                                    <!-- Statistics -->
+                                    <div class="row g-4">
+                                        <div class="col-sm-6 col-xl-3">
+                                            <div class="bg-body rounded p-4 text-center">
+                                                <h6 class="text-muted mb-2">Total URLs</h6>
+                                                <h3 id="totalUrls" class="mb-0">0</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-xl-3">
+                                            <div class="bg-body rounded p-4 text-center">
+                                                <h6 class="text-muted mb-2">Filtered</h6>
+                                                <h3 id="filteredUrls" class="mb-0">0</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-xl-3">
+                                            <div class="bg-body rounded p-4 text-center">
+                                                <h6 class="text-muted mb-2">Selected</h6>
+                                                <h3 id="selectedUrls" class="mb-0">0</h3>  <!-- Add this ID -->
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-xl-3">
+                                            <div class="bg-body rounded p-4 text-center">
+                                                <h6 class="text-muted mb-2">Avg Priority</h6>
+                                                <h3 id="avgPriority" class="mb-0">0</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Section to display scraped results -->
+                                <div class="bg-body rounded">
+                                    <!--Toolbar Pannel -->
+                                    <div class="p-4 border-bottom">
+                                        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                                            <div class="d-flex gap-2">
+                                                <div class="btn-group">
+                                                    <input type="checkbox" class="btn-check" id="selectAll"
+                                                        autocomplete="off">
+                                                    <label class="btn btn-outline-primary" for="selectAll">Select
+                                                        All</label>
+                                                </div>
+                                            </div>
+                                            <div class="btn-group">
+                                                <input type="radio" class="btn-check" name="viewMode" id="listView"
+                                                    checked autocomplete="off">
+                                                <label class="btn btn-outline-secondary" for="listView">
+                                                    <i class="bi bi-list"></i>
+                                                </label>
+                                                <input type="radio" class="btn-check" name="viewMode" id="gridView"
+                                                    autocomplete="off">
+                                                <label class="btn btn-outline-secondary" for="gridView">
+                                                    <i class="bi bi-grid"></i>
+                                                </label>
+                                                <input type="radio" class="btn-check" name="viewMode" id="detailView"
+                                                    autocomplete="off">
+                                                <label class="btn btn-outline-secondary" for="detailView">
+                                                    <i class="bi bi-card-text"></i>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group list-group-flush" id="scrapedResultsList">
+                                    <!-- List items will be dynamically added here -->
+                                </div>
+
+                                <!-- Pagination and Process Selected Button (if needed) -->
+                                <!-- Pagination -->
+                                <div class="p-4 border-top">
+                                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                                        <small id="showingItemsText" class="text-muted">Showing 1-10 of 567 items</small>
+                                       <!-- Pagination -->
+<nav aria-label="Page navigation">
+    <ul class="pagination pagination-sm mb-0" id="paginationContainer">
+        <!-- Pagination links will be dynamically added here -->
+    </ul>
+</nav>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center">
+                                        <button type="button" class="btn btn-primary px-4" id="processSelectedBtn">
+                                            <i class="bi bi-check-lg"></i> Process Selected
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="container-fluid border-top py-4 mt-auto bg-body" style="margin-top:auto;">
+        <div class="container">
+            <div class="row g-4 justify-content-between">
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-center"
+                            style="width:36px;height:36px">
+                            <span class="text-white fw-bold">H</span>
+                        </div>
+                        <div class="ms-3">
+                            <strong>HelpBot AI</strong>
+                            <span class="d-block small text-body-secondary">Unlocking the Treasure of Knowledge.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="row g-4">
+                        <div class="col-sm-4">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a href="/en/about/" class="nav-link px-0 text-body-secondary">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/en/contact/" class="nav-link px-0 text-body-secondary">Contact Us</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a href="/en/terms/" class="nav-link px-0 text-body-secondary">Terms of Use</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/en/privacy/" class="nav-link px-0 text-body-secondary">Privacy Policy</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link px-0 text-body-secondary disabled"> <i
+                                            class="bi bi-facebook"></i> <span class="ms-1">Facebook</span> </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link px-0 text-body-secondary disabled"> <i class="bi bi-twitter"></i>
+                                        <span class="ms-1">Twitter</span> </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Sign Out Modal -->
+    <div class="modal fade" id="signOutModal" tabindex="-1" aria-labelledby="signOutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body p-4 text-center">
+                    <button type="button" class="btn-close position-absolute top-0 end-0 mt-3 me-3"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!-- Icon -->
+                    <div class="mb-4">
+                        <i class="bi bi-box-arrow-right text-primary" style="font-size: 3rem;"></i>
+                    </div>
+                    <!-- Title -->
+                    <h4 class="modal-title mb-3" id="signOutModalLabel">Sign Out</h4>
+                    <!-- Message -->
+                    <p class="text-body-secondary mb-4">
+                        Are you sure you want to sign out from your account? </p>
+                    <!-- Buttons -->
+                    <form method="post" action="/en/user/logout/">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="token">
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                            <button type="submit" class="btn btn-primary px-4 py-2">
+                                Yes, sign out
+                            </button>
+                            <button type="button" class="btn btn-light px-4 py-2" data-bs-dismiss="modal">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Processing Modal -->
+    <!-- Task Progress Modal -->
+    <!-- Task Progress Modal -->
+    <div class="modal fade" id="taskProgressModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="taskProgressModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body p-4 text-center">
+                    <!-- Spinner -->
+                    <div class="mb-4">
+                        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    <!-- Title -->
+                    <h4 class="modal-title mb-3" id="taskProgressModalLabel">Progress</h4>
+                    <!-- Progress -->
+                    <div class="mb-3">
+                        <div class="progress" role="progressbar" style="height: 10px;">
+                            <div id="taskProgressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                                style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <!-- Status -->
+                    <p id="taskProgressMessage" class="text-body-secondary mb-0">
+                        Loading...
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('themeToggleBtn').onclick = () => {
+            let root = document.documentElement,
+                newTheme = root.getAttribute('data-bs-theme') === 'light' ? 'dark' : 'light';
+            root.setAttribute('data-bs-theme', newTheme);
+
+            let icon = document.querySelector('#themeToggleBtn i');
+            icon.className = newTheme === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
+
+            let header = document.querySelector('header.navbar'),
+                footer = document.querySelector('footer.container-fluid');
+
+            if (newTheme === 'dark') {
+                header.classList.replace('bg-white', 'bg-dark');
+                header.classList.add('navbar-dark');
+                footer.classList.replace('bg-white', 'bg-dark');
+                footer.classList.add('text-light');
+            } else {
+                header.classList.replace('bg-dark', 'bg-white');
+                header.classList.remove('navbar-dark');
+                footer.classList.replace('bg-dark', 'bg-white');
+                footer.classList.remove('text-light');
+            }
+        }
+    </script>
+    <!-- Link to your external JavaScript file -->
+    <script src="{% static 'js/sitemap.js' %}"></script>
+</body>
+
+</html>

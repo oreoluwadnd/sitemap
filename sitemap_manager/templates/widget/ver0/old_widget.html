@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Стили -->
+    <link rel="stylesheet" href="css/open-props.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Дополнительные стили для виджета -->
+    <style>
+        ix-helpbot {
+            --chat-width: 380px;
+            --chat-height: 600px;
+            --message-spacing: var(--size-3);
+            --avatar-size: 32px;
+            
+            position: fixed;
+            bottom: var(--size-4);
+            right: var(--size-4);
+            width: var(--chat-width);
+            height: var(--chat-height);
+            border-radius: var(--radius-3);
+            box-shadow: var(--shadow-3);
+            background: var(--gradient-23);
+            overflow: hidden;
+        }
+
+        .chat-header {
+            padding: var(--size-3);
+            background: var(--gray-9);
+            color: var(--gray-0);
+            display: flex;
+            align-items: center;
+            gap: var(--size-3);
+            border-bottom: 1px solid var(--gray-8);
+        }
+
+        .chat-messages {
+            padding: var(--size-3);
+            overflow-y: auto;
+            height: calc(100% - 120px);
+            background: var(--gray-1);
+        }
+
+        .message {
+            margin: var(--message-spacing) 0;
+            max-width: 85%;
+            padding: var(--size-3);
+            border-radius: var(--radius-3);
+            position: relative;
+        }
+
+        .user-message {
+            margin-left: auto;
+            background: var(--blue-6);
+            color: white;
+            border-radius: var(--radius-3) var(--radius-3) 0 var(--radius-3);
+        }
+
+        .bot-message {
+            margin-right: auto;
+            background: white;
+            border-radius: 0 var(--radius-3) var(--radius-3) var(--radius-3);
+            box-shadow: var(--shadow-1);
+        }
+
+        .chat-input {
+            padding: var(--size-3);
+            background: var(--gray-0);
+            border-top: 1px solid var(--gray-3);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            gap: var(--size-3);
+        }
+
+        .avatar {
+            width: var(--avatar-size);
+            height: var(--avatar-size);
+            border-radius: var(--radius-round);
+            object-fit: cover;
+        }
+
+        .timestamp {
+            font-size: var(--font-size-0);
+            color: var(--gray-6);
+            margin-top: var(--size-2);
+        }
+    </style>
+
+    <!-- Скрипт виджета -->
+    <script src="https://ai.ioix.net/_/widget/component.js"></script>
+</head>
+<body>
+    <ix-helpbot
+        id="helpbot-preview"
+        theme="dark-choco"
+        title="Громадське управління містом"
+        image="/-/assists/ruben.jpeg"
+        description="Я знаю все про громадське управління містом. *Питай!*"
+        assistant="asst_iXGT473KD8YURmnlRDxzeVN5"
+        placeholder="Введіть ваше питання..."
+        websocket="wss://ai.ioix.net/ws/assistants/5/"
+        open
+    >
+        <div class="chat-header">
+            <img src="/-/assists/ruben.jpeg" alt="Assistant Avatar" class="avatar">
+            <div>
+                <h3 style="margin:0">Громадське управління містом</h3>
+                <small>Онлайн</small>
+            </div>
+        </div>
+
+        <div class="chat-messages">
+            <div class="message bot-message">
+                Вітаю! Я ваш помічник з питань громадського управління містом. Чим можу допомогти?
+                <div class="timestamp">10:00</div>
+            </div>
+
+            <div class="message user-message">
+                Що таке громадський бюджет?
+                <div class="timestamp">10:01</div>
+            </div>
+
+            <div class="message bot-message">
+                Громадський бюджет (або бюджет участі) - це демократичний процес, який дозволяє мешканцям міста брати безпосередню участь у розподілі частини міського бюджету. Ви можете подавати проекти та голосувати за ініціативи інших громадян.
+                <div class="timestamp">10:01</div>
+            </div>
+
+            <div class="message user-message">
+                Як подати проект?
+                <div class="timestamp">10:02</div>
+            </div>
+
+            <div class="message bot-message">
+                Для подання проекту потрібно:
+                1. Зареєструватися на платформі громадського бюджету
+                2. Заповнити форму проекту
+                3. Додати кошторис
+                4. Зібрати підписи підтримки
+                5. Подати проект на розгляд
+                <div class="timestamp">10:02</div>
+            </div>
+
+            <div class="message user-message">
+                Скільки підписів потрібно зібрати?
+                <div class="timestamp">10:03</div>
+            </div>
+
+            <div class="message bot-message">
+                Для подання проекту необхідно зібрати мінімум 50 підписів від мешканців міста. Це можна зробити як онлайн через платформу, так і в паперовому вигляді.
+                <div class="timestamp">10:03</div>
+            </div>
+
+            <div class="message user-message">
+                А який максимальний бюджет проекту?
+                <div class="timestamp">10:04</div>
+            </div>
+
+            <div class="message bot-message">
+                Максимальний бюджет залежить від категорії проекту:
+                - Малі проекти: до 100 000 грн
+                - Середні проекти: до 500 000 грн
+                - Великі проекти: до 1 500 000 грн
+                
+                Також є окремі категорії для загальноміських проектів з більшим бюджетом.
+                <div class="timestamp">10:04</div>
+            </div>
+
+            <div class="message user-message">
+                Коли можна подавати проекти?
+                <div class="timestamp">10:05</div>
+            </div>
+
+            <div class="message bot-message">
+                Подання проектів відбувається щорічно з 1 березня по 15 травня. Після цього проекти проходять експертизу, а голосування триває з 1 по 30 вересня.
+                <div class="timestamp">10:05</div>
+            </div>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" placeholder="Введіть ваше питання..." style="width:100%; padding:var(--size-2); border-radius:var(--radius-2); border:1px solid var(--gray-4)">
+            <button style="padding:var(--size-2) var(--size-3); border-radius:var(--radius-2); background:var(--blue-6); color:white; border:none">
+                <i class="bi bi-send"></i>
+            </button>
+        </div>
+    </ix-helpbot>
+</body>
+</html>
